@@ -3,7 +3,7 @@ using UnityEngine.AI;
 using System.Collections;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Patrol : MonoBehaviour
+public class PatrolScript : MonoBehaviour
 {
 
     public Transform[] points;
@@ -41,9 +41,9 @@ public class Patrol : MonoBehaviour
 
     void Update()
     {
-         // Choose the next destination point when the agent gets
+        // Choose the next destination point when the agent gets
         // close to the current one.
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
-            GotoNextPoint(); 
+            GotoNextPoint();
     }
 }
