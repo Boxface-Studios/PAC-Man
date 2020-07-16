@@ -5,8 +5,11 @@ using UnityEngine;
 public class BasicControls : MonoBehaviour
 {
     public float speed = 10;
+    float hAxis;
+    float vAxis;
 
     public Rigidbody player1;
+    Vector3 p1MovementVector;
 
     // Start is called before the first frame update
     void Start()
@@ -14,14 +17,23 @@ public class BasicControls : MonoBehaviour
         player1 = GetComponent<Rigidbody>();
     }
 
+    private void FixedUpdate()
+    {
+        player1.MovePosition(transform.position + p1MovementVector);
+        player1.MoveRotation(Quaternion.LookRotation(p1MovementVector, Vector3.up));
+    }
     // Update is called once per frame
     void Update()
     {
-        float hAxis = Input.GetAxis("Horizontal");
-        float vAxis = Input.GetAxis("Vertical");
+        GetInput();
 
-        Vector3 movement = new Vector3(hAxis, 0, vAxis) * speed * Time.deltaTime;
+    }
 
-        player1.MovePosition(transform.position + movement);
+    void GetInput()
+    {
+        hAxis = Input.GetAxis("Horizontal"); //player1 hAxis
+        vAxis = Input.GetAxis("Vertical"); // player1 vAxis
+        //set player one movement vector
+        p1MovementVector.Set(hAxis * speed * Time.deltaTime, 0, vAxis * speed * Time.deltaTime);
     }
 }
