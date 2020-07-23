@@ -25,11 +25,22 @@ public class HealthUI : MonoBehaviour
     void Start()
     {
         HealthP1 = playerOne.GetComponent<Health>();
+        HealthP2 = playerTwo.GetComponent<Health>();
+        HealthP3 = playerThree.GetComponent<Health>();
+        HealthP4 = playerFour.GetComponent<Health>();
     }
 
     // Update is called once per frame
     void Update()
     {
         HBar1.fillAmount = HealthP1.health / 100;
+        HBar2.fillAmount = HealthP2.health / 100;
+        HBar3.fillAmount = HealthP3.health / 100;
+        HBar4.fillAmount = HealthP4.health / 100;
     }
+
+    //public void PlayerDamage (int playerDMG)
+   // {
+      //  playerDMG -= HealthP1;
+   // }
 }

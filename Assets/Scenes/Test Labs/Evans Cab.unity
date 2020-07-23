@@ -257,7 +257,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -274,7 +274,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
-  player1: {fileID: 157024005}
+  playerNumber: 0
+  rb: {fileID: 0}
 --- !u!114 &157024007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,10 +285,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 157024002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4ad2767acccf847970c7f9d91ea020, type: 3}
+  m_Script: {fileID: 11500000, guid: f25075c82d871e4478fc2859d55d10cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageDeltToCollision: 1
+  hasPowerUp: 0
+  powerCD: 0
+  powerTimer: 10
+--- !u!114 &157024008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157024002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11edc7d8fe122db48a125c45469b3b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 25
 --- !u!114 &157024009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,7 +571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291366651}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.385, z: 0}
+  m_LocalPosition: {x: 0, y: 0.385, z: -0.234}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 157024004}
@@ -1459,7 +1475,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4ad2767acccf847970c7f9d91ea020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageDeltToCollision: 0
+  healthUI: {fileID: 0}
+  hasPowerUp: 0
+  powerCD: 0
+  powerTimer: 0
 --- !u!1 &1122698488 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 153384, guid: 44c107492f53a7f499432ecb3b57d559,
@@ -1587,6 +1606,19 @@ CapsuleCollider:
   m_Height: 3.4
   m_Direction: 1
   m_Center: {x: 0, y: 1.36, z: 0}
+--- !u!114 &1216080855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216080853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11edc7d8fe122db48a125c45469b3b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 25
 --- !u!54 &1216080857
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1603,19 +1635,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1216080858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216080853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4ad2767acccf847970c7f9d91ea020, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageDeltToCollision: 1
 --- !u!114 &1216080859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1818,6 +1837,61 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44c107492f53a7f499432ecb3b57d559, type: 3}
+--- !u!1 &1392053106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1392053108}
+  - component: {fileID: 1392053107}
+  m_Layer: 0
+  m_Name: HealthUiManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1392053107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392053106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5dafbd5846a2304789bb9ac6f05bd86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerOne: {fileID: 157024002}
+  playerTwo: {fileID: 1216080853}
+  playerThree: {fileID: 0}
+  playerFour: {fileID: 0}
+  HealthP1: {fileID: 157024009}
+  HealthP2: {fileID: 1216080859}
+  HealthP3: {fileID: 0}
+  HealthP4: {fileID: 0}
+  HBar1: {fileID: 463104645}
+  HBar2: {fileID: 0}
+  HBar3: {fileID: 0}
+  HBar4: {fileID: 0}
+--- !u!4 &1392053108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392053106}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1416799216 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 153384, guid: 44c107492f53a7f499432ecb3b57d559,
@@ -1955,7 +2029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 181750, guid: b2823ec5a0d529e4488dbce15e2df0a2, type: 3}
       propertyPath: m_TagString
-      value: Pickup
+      value: PowerUp
       objectReference: {fileID: 0}
     - target: {fileID: 462138, guid: b2823ec5a0d529e4488dbce15e2df0a2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2301,7 +2375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 177236, guid: 3c30f5af21f2ba74eafc170b2b3df88d, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Zombie
       objectReference: {fileID: 0}
     - target: {fileID: 445794, guid: 3c30f5af21f2ba74eafc170b2b3df88d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2595,7 +2669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 147588, guid: a23df827e2c28b044a18d385b58ce3f7, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: PACMAN
       objectReference: {fileID: 0}
     - target: {fileID: 434318, guid: a23df827e2c28b044a18d385b58ce3f7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2655,3 +2729,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a23df827e2c28b044a18d385b58ce3f7, type: 3}
+--- !u!1 &2066784352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2066784354}
+  - component: {fileID: 2066784353}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2066784353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066784352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d08c6dcb9bf6dd4eb81066d7db6e0ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerJoystickButtonPressedEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  playerJoystickButtonHeldEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  playerJoystickButtonReleasedEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  playerJoystickAxisEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  configurationFinishedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  useEvents: 0
+  resetPlayersKey: 292
+  dontConfigureInEditor: 0
+--- !u!4 &2066784354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066784352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

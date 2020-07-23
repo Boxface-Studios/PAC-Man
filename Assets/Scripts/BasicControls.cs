@@ -1,39 +1,56 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SAE;
 
 public class BasicControls : MonoBehaviour
 {
     public float speed = 10;
     float hAxis;
     float vAxis;
+    //public enum PlayerColorId { UNKNOWN, YELLOW_PLAYER, BLUE_PLAYER, RED_PLAYER, GREEN_PLAYER }
 
-    public Rigidbody player1;
-    Vector3 p1MovementVector;
+    public int playerNumber;
+
+
+    public Rigidbody rb;
+    Vector3 MovementVector;
 
     // Start is called before the first frame update
     void Start()
     {
-        player1 = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-        player1.MovePosition(transform.position + p1MovementVector);
-        player1.MoveRotation(Quaternion.LookRotation(p1MovementVector, Vector3.up));
+        rb.MovePosition(transform.position + MovementVector);
+        rb.MoveRotation(Quaternion.LookRotation(MovementVector, Vector3.up));
     }
     // Update is called once per frame
     void Update()
     {
         GetInput();
-
+        SetMovementVector();
     }
 
     void GetInput()
     {
-        hAxis = Input.GetAxis("Horizontal"); //player1 hAxis
-        vAxis = Input.GetAxis("Vertical"); // player1 vAxis
-        //set player one movement vector
-        p1MovementVector.Set(hAxis * speed * Time.deltaTime, 0, vAxis * speed * Time.deltaTime);
+        //default unity input
+        hAxis = Input.GetAxis("Horizontal"); 
+        vAxis = Input.GetAxis("Vertical");
+        //arcade machine input
+        // hAxis = SAE.ArcadeMachine.PlayerJoystickAxisStatic(PlayerColorId).x;
+        // vAxis = SAE.ArcadeMachine.PlayerJoystickAxisStatic(PlayerColorId).y;
+        //needs some code to set the playercolorid to this components player number
+
+
+
     }
+
+    public void SetMovementVector()
+    {
+        MovementVector.Set(hAxis * speed * Time.deltaTime, 0, vAxis * speed * Time.deltaTime);
+    }
+
 }
