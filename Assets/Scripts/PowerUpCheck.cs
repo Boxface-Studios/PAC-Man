@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PowerUpCheck : MonoBehaviour
 {
+	public GameObject defaultLight;
+	public GameObject powerUpLight;
+
 	public bool hasPowerUp = false;
 	public bool powerCD;
 	public float powerTimer = 10f;
-
 
 	void Update()
 	{
 		//timer cooldown when powerup has been picked up
 		if (hasPowerUp == true)
 		{
+			defaultLight.SetActive(false);
+			powerUpLight.SetActive(true);
+
 			powerTimer -= Time.deltaTime;
 		}
 
@@ -22,6 +27,9 @@ public class PowerUpCheck : MonoBehaviour
 		{
 			hasPowerUp = false;
 			powerTimer = 10f;
+			defaultLight.SetActive(true);
+			powerUpLight.SetActive(false);
+
 
 		}
 

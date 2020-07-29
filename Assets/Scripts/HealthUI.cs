@@ -20,8 +20,6 @@ public class HealthUI : MonoBehaviour
     public Image HBar3;
     public Image HBar4;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         HealthP1 = playerOne.GetComponent<Health>();
@@ -30,7 +28,6 @@ public class HealthUI : MonoBehaviour
         HealthP4 = playerFour.GetComponent<Health>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         HBar1.fillAmount = HealthP1.health / 100;
@@ -38,9 +35,4 @@ public class HealthUI : MonoBehaviour
         HBar3.fillAmount = HealthP3.health / 100;
         HBar4.fillAmount = HealthP4.health / 100;
     }
-
-    //public void PlayerDamage (int playerDMG)
-   // {
-      //  playerDMG -= HealthP1;
-   // }
 }
