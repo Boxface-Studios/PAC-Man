@@ -134,7 +134,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.990566, g: 0.9797964, b: 0.5934051, a: 1}
+  m_Color: {r: 1, g: 0.97627795, b: 0.18396229, a: 1}
   m_Intensity: 2
   m_Range: 22
   m_SpotAngle: 30
@@ -221,14 +221,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061460607576139373}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddc4eefa185308d4e8e8c5338b7d7914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
   playerNumber: 1
-  rb: {fileID: 0}
+  rb: {fileID: 157024005}
 --- !u!114 &157024007
 MonoBehaviour:
   m_ObjectHideFlags: 0
