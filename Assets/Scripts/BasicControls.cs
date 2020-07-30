@@ -5,21 +5,33 @@ using SAE;
 
 public class BasicControls : MonoBehaviour
 {
-    public float speed = 10;
-    float hAxis;
-    float vAxis;
-    //public enum PlayerColorId { UNKNOWN, YELLOW_PLAYER, BLUE_PLAYER, RED_PLAYER, GREEN_PLAYER }
+    [SerializeField] private float speed = 10;
+    private float hAxis;
+    private float vAxis;
+    public enum PlayerColorId { UNKNOWN, YELLOW_PLAYER, BLUE_PLAYER, RED_PLAYER, GREEN_PLAYER }
+    private PlayerColorId playerColor;
 
-    public int playerNumber;
+    [Header("DO NOT CHANGE")]
+    [SerializeField] private int playerNumber;
 
 
-    public Rigidbody rb;
+    private Rigidbody rb;
     Vector3 MovementVector;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    public void SetColor(PlayerColorId newColor)
+    {
+        playerColor = newColor;
+    }
+
+    public PlayerColorId GetColor()
+    {
+        return playerColor;
     }
 
     private void FixedUpdate()
